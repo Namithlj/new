@@ -1,0 +1,99 @@
+import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
+import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
+import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
+import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
+import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
+import com.kms.katalon.core.checkpoint.Checkpoint as Checkpoint
+import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as CucumberKW
+import com.kms.katalon.core.mobile.keyword.MobileBuiltInKeywords as Mobile
+import com.kms.katalon.core.model.FailureHandling as FailureHandling
+import com.kms.katalon.core.testcase.TestCase as TestCase
+import com.kms.katalon.core.testdata.TestData as TestData
+import com.kms.katalon.core.testng.keyword.TestNGBuiltinKeywords as TestNGKW
+import com.kms.katalon.core.testobject.TestObject as TestObject
+import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
+import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
+import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
+import internal.GlobalVariable as GlobalVariable
+import org.openqa.selenium.Keys as Keys
+
+import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
+import com.kms.katalon.core.testobject.TestObject
+import com.kms.katalon.core.testobject.ConditionType
+import org.openqa.selenium.Keys
+
+// 🔧 Utility to create dynamic TestObject with XPath
+def byXPath(String xpath) {
+	TestObject to = new TestObject()
+	to.addProperty("xpath", ConditionType.EQUALS, xpath)
+	return to
+}
+
+// 1. Open Browser
+WebUI.openBrowser('')
+WebUI.maximizeWindow()
+WebUI.navigateToUrl('https://the-internet.herokuapp.com/')
+
+// 2. Textbox (Username & Password)
+WebUI.click(byXPath("//a[text()='Form Authentication']"))
+WebUI.setText(byXPath("//input[@id='username']"), 'tomsmith')
+WebUI.setEncryptedText(byXPath("//input[@id='password']"), 'hUKwJTbofgPU9eVlw/CnDQ==')
+WebUI.click(byXPath("//button[@type='submit']"))
+
+// 3. Checkbox
+WebUI.navigateToUrl('https://the-internet.herokuapp.com/checkboxes')
+WebUI.check(byXPath("(//input[@type='checkbox'])[1]"))
+WebUI.uncheck(byXPath("(//input[@type='checkbox'])[1]"))
+
+// 4. Combo Box
+WebUI.navigateToUrl('https://the-internet.herokuapp.com/dropdown')
+WebUI.selectOptionByIndex(byXPath("//select[@id='dropdown']"), 1)
+
+// 5. File Upload
+WebUI.navigateToUrl('https://the-internet.herokuapp.com/upload')
+WebUI.uploadFile(byXPath("//input[@id='file-upload']"), 'C:\\Users\\Hp\\Downloads\\BIS657E.pdf')
+WebUI.click(byXPath("//input[@id='file-submit']"))
+
+// 6. Screenshot
+WebUI.takeScreenshot()
+
+// 7. Scroll
+WebUI.scrollToPosition(0, 1000)
+WebUI.delay(1)
+WebUI.scrollToPosition(0, 0)
+
+// 8. Alert
+WebUI.navigateToUrl('https://the-internet.herokuapp.com/javascript_alerts')
+WebUI.click(byXPath("//button[text()='Click for JS Alert']"))
+WebUI.acceptAlert()
+
+// 9. Frame
+WebUI.navigateToUrl('https://the-internet.herokuapp.com/iframe')
+WebUI.switchToFrame(byXPath("//iframe[@id='mce_0_ifr']"), 10)
+WebUI.click(byXPath("//body[@id='tinymce']"))  // Focus
+WebUI.sendKeys(byXPath("//body[@id='tinymce']"), Keys.chord(Keys.CONTROL, "a"))
+WebUI.sendKeys(byXPath("//body[@id='tinymce']"), "Text inside the frame")
+WebUI.switchToDefaultContent()
+
+
+// 10. Mouse Hover
+WebUI.navigateToUrl('https://the-internet.herokuapp.com/hovers')
+WebUI.mouseOver(byXPath("(//div[@class='figure'])[1]"))
+
+// 11. Drag and Drop (may not work in Firefox)
+WebUI.navigateToUrl('https://the-internet.herokuapp.com/drag_and_drop')
+WebUI.dragAndDropToObject(
+	byXPath("//div[@id='column-a']"),
+	byXPath("//div[@id='column-b']")
+)
+
+// 12. Keystroke
+WebUI.navigateToUrl('https://the-internet.herokuapp.com/inputs')
+WebUI.sendKeys(byXPath("//input[@type='number']"), Keys.chord(Keys.ARROW_UP, Keys.ARROW_DOWN))
+
+// 13. Close
+WebUI.delay(2)
+WebUI.closeBrowser()
+
+create a test case in katalon studio and 
+paste this in  script mode and run it
