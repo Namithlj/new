@@ -95,5 +95,3 @@ WebUI.sendKeys(byXPath("//input[@type='number']"), Keys.chord(Keys.ARROW_UP, Key
 WebUI.delay(2)
 WebUI.closeBrowser()
 
-create a test case in katalon studio and 
-paste this in  script mode and run it
