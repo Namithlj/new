@@ -93,5 +93,5 @@ WebUI.sendKeys(byXPath("//input[@type='number']"), Keys.chord(Keys.ARROW_UP, Key
 
 // 13. Close
 WebUI.delay(2)
-WebUI.closeBrowser()
+
 
