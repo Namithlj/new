@@ -92,6 +92,6 @@ WebUI.navigateToUrl('https://the-internet.herokuapp.com/inputs')
 WebUI.sendKeys(byXPath("//input[@type='number']"), Keys.chord(Keys.ARROW_UP, Keys.ARROW_DOWN))
 
 // 13. Close
-WebUI.delay(2)
+
 
 
